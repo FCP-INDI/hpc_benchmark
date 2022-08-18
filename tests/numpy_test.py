@@ -9,6 +9,24 @@ def init_mat(N):
     return np.random.random((N, N))    
 
 
+def sort_mat(mat):
+    return np.sort(mat, kind="mergesort")
+
+
+def iterate(lower, upper, delay):
+    val = lower
+    while val <= upper:
+        print("Creating ({0}x{0}) matrix".format(val))
+        tmp = init_mat(val)
+        time.sleep(delay)
+        print("Sorting matrix")
+        tmp_sorted = sort_mat(tmp)
+        time.sleep(delay)
+
+        del tmp, tmp_sorted
+        val *= 2
+
+
 def main():
     parser = ArgumentParser(
         description="Will initialize matrices and wait a few seconds before "
@@ -22,14 +40,7 @@ def main():
                         help="How long to hold a matrix (s)")
 
     args = parser.parse_args()
-
-    val = args.lower
-    while val <= args.upper:
-        print("Creating ({0}x{0}) matrix".format(val))
-        tmp = init_mat(val)
-        time.sleep(args.delay)
-        del tmp
-        val *= 2
+    iterate(args.lower, args.upper, args.delay)
 
 
 if __name__ == "__main__":
