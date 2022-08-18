@@ -13,18 +13,22 @@ def sort_mat(mat):
     return np.sort(mat, kind="mergesort")
 
 
-def iterate(lower, upper, delay):
+def iterate(lower, upper, delay, rest=0):
     val = lower
     while val <= upper:
+        
         print("Creating ({0}x{0}) matrix".format(val))
         tmp = init_mat(val)
         time.sleep(delay)
+        
         print("Sorting matrix")
         tmp_sorted = sort_mat(tmp)
         time.sleep(delay)
 
         del tmp, tmp_sorted
         val *= 2
+
+        time.sleep(rest)
 
 
 def main():
@@ -37,10 +41,12 @@ def main():
     parser.add_argument("upper", type=int,
                         help="Upper bound matrix size")
     parser.add_argument("--delay", "-d", type=float, default=0.3,
-                        help="How long to hold a matrix (s)")
+                        help="How long to hold a matrix in memory (s)")
+    parser.add_argument("--rest", "-r", type=float, default=0,
+                        help="How long to pause between scales (s)")
 
     args = parser.parse_args()
-    iterate(args.lower, args.upper, args.delay)
+    iterate(args.lower, args.upper, args.delay, rest=args.rest)
 
 
 if __name__ == "__main__":
