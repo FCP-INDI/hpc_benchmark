@@ -1,9 +1,14 @@
+import argparse
 import sys
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-one_file = str(sys.argv[1])
+parser = argparse.ArgumentParser()
+parser.add_argument('file', help='Command to benchmark')
+args = parser.parse_args()
+
+one_file = (str(args.file))
 
 data = pd.read_csv (one_file, header = 0)
 df = pd.DataFrame(data)
