@@ -26,12 +26,13 @@ def log(command):
     log_time = []
     log_cpu = []
     log_mem = []
+    log_nproc = []
 
     while worker_process.is_alive():
         try:
             cpu = p.cpu_percent()
             ram = p.memory_info()[0]/1024/1024  # Convert from Bytes to MB
-            for subproc in p.children(recursive=True):
+            for idx, subproc in enumerate(p.children(recursive=True)):
                 if not subproc.is_running():
                     continue
                 subproc_dict = subproc.as_dict(attrs=['pid',
@@ -40,12 +41,13 @@ def log(command):
                                                     'memory_info'])
 
                 cpu += subproc.cpu_percent(interval=1)
-                ram += subproc_dict['memory_info'][0] * ram_lut['B']
+                ram += subproc_dict['memory_info'][0]/1024/1024
 
             tim = time.time()
             log_time.append(tim)
             log_cpu.append(cpu)
             log_mem.append(ram)
+            log_nproc.append(idx+1)
             time.sleep(0.05) #was 1
 
         except (psutil.AccessDenied,
@@ -58,11 +60,11 @@ def log(command):
     for i in range(len(log_time)):
         time_asc = time.asctime(time.localtime(log_time[i]))
         log_time_asc.append(time_asc)
-
+    print(np.array(log_nproc).shape)
     labels = ['LOG TIME', 'LOG CPU', 'LOG MEMORY']
     log_metrics = [np.array(log_time_asc), np.array(log_cpu), np.array(log_mem)]
     df = pd.DataFrame((np.array(log_metrics).T), columns = labels)
-    return df    
+    return df
 
 
 def main():  
@@ -74,7 +76,7 @@ def main():
     output_df = log(command)
 
     out_path = os.path.join(os.getcwd(), 'run_metric_outputs.csv')
-    df.to_csv(out_path, index = None)
+    output_df.to_csv(out_path, index = None)
 
 
 if __name__ == '__main__':
