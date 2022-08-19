@@ -32,6 +32,7 @@ def log(command):
         try:
             cpu = p.cpu_percent()
             ram = p.memory_info()[0]/1024/1024  # Convert from Bytes to MB
+            idx = 0
             for idx, subproc in enumerate(p.children(recursive=True)):
                 if not subproc.is_running():
                     continue
@@ -60,9 +61,9 @@ def log(command):
     for i in range(len(log_time)):
         time_asc = time.asctime(time.localtime(log_time[i]))
         log_time_asc.append(time_asc)
-    print(np.array(log_nproc).shape)
-    labels = ['LOG TIME', 'LOG CPU', 'LOG MEMORY']
-    log_metrics = [np.array(log_time_asc), np.array(log_cpu), np.array(log_mem)]
+    
+    labels = ['LOG TIME', 'LOG CPU', 'LOG MEMORY', 'LOG # PROC']
+    log_metrics = [np.array(log_time_asc), np.array(log_cpu), np.array(log_mem), np.array(log_nproc)]
     df = pd.DataFrame((np.array(log_metrics).T), columns = labels)
     return df
 
