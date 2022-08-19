@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 parser = argparse.ArgumentParser()
-parser.add_argument('file', help='Command to benchmark')
+parser.add_argument('file', help='Input CSV file from hpc_benchmark')
 args = parser.parse_args()
 
 one_file = (str(args.file))
