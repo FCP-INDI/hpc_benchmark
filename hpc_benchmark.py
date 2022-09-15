@@ -13,8 +13,17 @@ import time
 
 
 def target(command):
-    output = subprocess.run(command, check=True, capture_output=True, text=True).stdout
-    print(output)
+    #output = subprocess.run(command, check=True, capture_output=True, text=True).stdout
+    #print(output)
+    process = subprocess.Popen(command, stdout=subprocess.PIPE)
+    while True:
+        output = process.stdout.readline()
+        if output == '' and process.poll() is not None:
+            break
+        if output:
+            print((output.strip()).decode())
+    rc = process.poll()
+    return rc
 
 
 def log(command):
