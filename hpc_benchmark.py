@@ -13,8 +13,6 @@ import time
 
 
 def target(command):
-    #output = subprocess.run(command, check=True, capture_output=True, text=True).stdout
-    #print(output)
     process = subprocess.Popen(command, stdout=subprocess.PIPE)
     while True:
         output = process.stdout.readline()
