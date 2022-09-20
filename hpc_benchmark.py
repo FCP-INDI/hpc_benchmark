@@ -89,7 +89,7 @@ def main():
 
     outdir = (str(args.outdir))
     command = (str(args.run_command)).split(' ')
-    timestep = (float(args.timestep))
+    timestep = (float(args.max_sampling_rate))
     output_df = log(command, timestep)
 
     if outdir is not None: 
