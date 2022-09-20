@@ -16,7 +16,7 @@ def target(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE)
     while True:
         output = process.stdout.readline()
-        if output == '' and process.poll() is not None:
+        if process.poll() is not None:
             break
         if output:
             print((output.strip()).decode())
