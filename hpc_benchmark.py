@@ -24,7 +24,7 @@ def target(command):
     return rc
 
 
-def log(command):
+def log(command, timestep):
     output, sender = mp.Pipe(False)
     worker_process = mp.Process(target = target, args=(command,))
     worker_process.start()
@@ -56,7 +56,7 @@ def log(command):
             log_cpu.append(cpu)
             log_mem.append(ram)
             log_nproc.append(idx+1)
-            time.sleep(0.05) #was 1
+            time.sleep(timestep)
 
         except (psutil.AccessDenied,
                 psutil.NoSuchProcess,
@@ -76,14 +76,29 @@ def log(command):
 
 
 def main():  
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description = "Monitor any run in your command line. whatever you want to monitor (your commandline run) should be "
+        " between ' ' and then whatever additional argument."   
+    )
     parser.add_argument('run_command', type=str, help='Command to benchmark')
+    parser.add_argument('--outdir', '-o', help='Directory of where output CSV should be saved. Default is it '
+                        'will get saved in your current working directory')
+    parser.add_argument('--max_sampling_rate', '-msr', default = 1, help='Frequency in seconds of how often to output metrics.'
+                        'Default is about 1 second. This sampling rate is an estimate and may output +/- 2 seconds of the MSR.')
     args = parser.parse_args()
 
+    outdir = (str(args.outdir))
     command = (str(args.run_command)).split(' ')
-    output_df = log(command)
+    timestep = (float(args.timestep))
+    output_df = log(command, timestep)
 
-    out_path = os.path.join(os.getcwd(), 'run_metric_outputs.csv')
+    if outdir is not None: 
+        if os.path.splitext(outdir)[1] == '':
+            out_path = os.path.join(outdir, 'run_metric_outputs.csv')
+        else: 
+            out_path = os.path.join(outdir)
+    else:
+        out_path = os.path.join(os.getcwd(), 'run_metric_outputs.csv')
     output_df.to_csv(out_path, index = None)
 
 
