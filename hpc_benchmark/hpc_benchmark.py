@@ -5,7 +5,6 @@ import subprocess
 import pandas as pd
 import numpy as np
 import psutil
-import nibabel as nb
 import argparse
 from subprocess import PIPE
 import multiprocessing as mp
