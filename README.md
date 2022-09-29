@@ -1,4 +1,3 @@
-# hpc_benchmark
 High Performance Computing (HPC) Benchmark
 =============================================
 
