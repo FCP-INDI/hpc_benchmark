@@ -80,7 +80,7 @@ def main():
         " between ' ' and then whatever additional argument."   
     )
     parser.add_argument('run_command', type=str, help='Command to benchmark')
-    parser.add_argument('--outdir', '-o', help='Directory of where output CSV should be saved. Default is it '
+    parser.add_argument('--outdir', '-o', required = True, help='Directory of where output CSV should be saved. Default is it '
                         'will get saved in your current working directory')
     parser.add_argument('--max_sampling_rate', '-msr', default = 1, help='Frequency in seconds of how often to output metrics.'
                         'Default is about 1 second. This sampling rate is an estimate and may output +/- 2 seconds of the MSR.')
@@ -96,8 +96,7 @@ def main():
             out_path = os.path.join(outdir, 'run_metric_outputs.csv')
         else: 
             out_path = os.path.join(outdir)
-    else:
-        out_path = os.path.join(os.getcwd(), 'run_metric_outputs.csv')
+            
     output_df.to_csv(out_path, index = None)
 
 
