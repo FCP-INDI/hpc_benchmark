@@ -1,3 +1,4 @@
+from importlib.metadata import entry_points
 import os
 from setuptools import setup
 
@@ -23,4 +24,8 @@ opts = dict(name=NAME,
             python_requires=PYTHON_REQUIRES)
 
 if __name__ == '__main__':
-    setup(**opts)
+    setup(**opts,
+          entry_points = {
+              'console_scripts': ['hpc_benchmark=hpc_benchmark.command_line:main']
+          }
+    )
