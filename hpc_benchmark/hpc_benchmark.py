@@ -1,4 +1,28 @@
 #!/usr/bin/env python
+"""
+Monitor CPU percetage, memory in MB, and processor information of any command line run
+Usage:
+    hpc_benchmark 'run command' [options] <output_directory>
+
+Arguments:
+    'run command'              Command line run you would like to monitor
+    <output_directory>         Directory you would like to save output CSV file 
+
+Options:
+  --out_dir -o  PATH            Full path where output CSV file will be saved in
+  --max_sampling_rate -msr INT  Frequency in seconds of how often to output metrics.
+                                Default is about 1 second. This sampling rate is an 
+                                estimate and may output +/- 2 seconds of the MSR.
+  --help                        Print help
+DETAILS
+Monitor metrics of any command line run. Metrics include CPU percentage, memory usage (MB), 
+and processor information. Metrics information will be logged every second by default.
+You can set the sampling rate with flag `--max_sampling_rate`. 
+A CSV file will output after the run is complete that contains
+metrics information. 
+
+Written by Amy Gutierrez (amy.gutierrez@childmind.org)
+"""
 
 import os
 import subprocess
@@ -79,9 +103,8 @@ def main():
         description = "Monitor any run in your command line. whatever you want to monitor (your commandline run) should be "
         " between ' ' and then whatever additional argument."   
     )
-    parser.add_argument('run_command', type=str, help='Command to benchmark')
-    parser.add_argument('--outdir', '-o', required = True, help='Directory of where output CSV should be saved. Default is it '
-                        'will get saved in your current working directory')
+    parser.add_argument('run_command', type=str, help='Command line run')
+    parser.add_argument('--outdir', '-o', required = True, help='Directory of where output CSV should be saved')
     parser.add_argument('--max_sampling_rate', '-msr', default = 1, help='Frequency in seconds of how often to output metrics.'
                         'Default is about 1 second. This sampling rate is an estimate and may output +/- 2 seconds of the MSR.')
     args = parser.parse_args()

@@ -26,7 +26,10 @@ opts = dict(name=NAME,
 
 if __name__ == '__main__':
     setup(entry_points = {
-              'console_scripts': ['hpc_benchmark = hpc_benchmark.hpc_benchmark:main']
+              'console_scripts': [
+                  'hpc_benchmark = hpc_benchmark.hpc_benchmark:main',
+                  'hpc_plot_metrics = hpc_benchmark.bin.hpc_plot_metrics:main'
+                  ]
           },
           **opts
     )
