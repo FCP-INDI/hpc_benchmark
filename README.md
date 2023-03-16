@@ -28,13 +28,18 @@ Options:
 ```
 
     INPUTS:
-    - Your command should be between `' '`. This way, hpc_benchmark will run  whatever is between `' '` in the terminal.
+    - Your command should be between `' '`. This way, hpc_benchmark will run 
+      whatever is between `' '` in the terminal.
 
     OUTPUTS:
-    - Specify output directory with flag `-o`. hpc_benchmark will output a CSV file  with all the COU and memory usage informtion. 
+    - Specify output directory with flag `-o`. hpc_benchmark will output a CSV file 
+      with all the COU and memory usage informtion. 
 
     OPTIONAL: 
-    - The `-msr INT` flag should be used if you want to specify the interval in which CPU  or memory usage gets benchmarked. It defaults to 1 second, so if you are running something that  takes hours, it is recommended to use `-msr 60` so that metric will be meaured every minute.
+    - The `-msr INT` flag should be used if you want to specify the interval in which CPU 
+      or memory usage gets benchmarked. It defaults to 1 second, so if you are running 
+      something that takes hours, it is recommended to use `-msr 60` so that metric will 
+      be meaured every minute.
 
 EXAMPLE: 
 ```
