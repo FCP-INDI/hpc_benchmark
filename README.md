@@ -10,6 +10,17 @@ A CSV file will output after the run is complete that contains
 metrics information. 
 <br>
 
+<b>Installation</b>
+--------------------
+Currently, this CLI tool is on TestPyPi.
+To pip install: 
+```
+pip install -i https://test.pypi.org/simple/ hpc-benchmark
+```
+
+<b>User Guide</b>
+------------------
+
 <b>hpc_benchmark</b>
 
 ```
