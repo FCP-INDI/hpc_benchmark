@@ -28,24 +28,32 @@ Options:
 ```
 
     INPUTS:
-    - Your command should be between `' '`. This way, hpc_benchmark will run whatever is between `' '` in the terminal.
+    - Your command should be between `' '`. This way, hpc_benchmark will run  whatever is between `' '` in the terminal.
 
     OUTPUTS:
-    - Specify output directory with flag `-o`. hpc_benchmark will output a CSV file with all the COU and memory usage informtion. 
+    - Specify output directory with flag `-o`. hpc_benchmark will output a CSV file  with all the COU and memory usage informtion. 
 
     OPTIONAL: 
-    - The `-msr INT` flag should be used if you want to specify the interval in which CPU or memory usage gets benchmarked. It defaults to 1 second, so if you are running something that takes hours, it is recommended to use `-msr 60` so that metric will be meaured every minute.
+    - The `-msr INT` flag should be used if you want to specify the interval in which CPU  or memory usage gets benchmarked. It defaults to 1 second, so if you are running something that  takes hours, it is recommended to use `-msr 60` so that metric will be meaured every minute.
 
 EXAMPLE: 
 ```
-hpc_benchmark 'docker run --security-opt=apparmor:unconfined --rm -v /home/{username}/data:/data -v /home/{username}/output:/output fcpindi/c-pac:latest /data /output participant --save_working_dir --skip_bids_validator --n_cpus 1 --mem_gb 15 --participant_label sub-12345 --preconfig abcd-options' -o /home/{username}/hpc_benchmark.csv -msr 60
+hpc_benchmark 'docker run \
+--security-opt=apparmor:unconfined \
+--rm -v /home/{username}/data:/data \
+-v /home/{username}/output:/output fcpindi/c-pac:latest \
+/data /output participant \
+--save_working_dir --skip_bids_validator \
+--n_cpus 1 --mem_gb 15 \
+--participant_label sub-12345 \
+--preconfig abcd-options' \
+-o /home/{username}/hpc_benchmark.csv -msr 60
 ```
 
 <b>hpc_plot_metrics</b>
 
 ```
 hpc_plot_metrics </home/{username}/{file}.csv>
-
 ```
 
 Arguments: 
