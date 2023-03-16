@@ -66,6 +66,7 @@ hpc_benchmark 'docker run \
 -o /home/{username}/hpc_benchmark.csv -msr 60
 ```
 
+<br>
 <b>hpc_plot_metrics</b>
 
 ```
