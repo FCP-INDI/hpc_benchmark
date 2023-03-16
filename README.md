@@ -59,10 +59,10 @@ hpc_benchmark 'docker run \
 
 ```
 hpc_plot_metrics </home/{username}/{file}.csv>
-```
 
 Arguments: 
   {CSV file}                  CSV file that was the output for hpc_benchmark run
+```
 
 Details: 
 Use the output CSV file from your hpc_benchmark run as the input argument for 
@@ -73,3 +73,4 @@ EXAMPLE:
 ```
 hpc_plot_metrics /home/{username}/hpc_benchmark.csv
 ```
+![image](https://user-images.githubusercontent.com/58920810/225639070-fec2dc9d-ffdc-4603-937b-8a736ff71e5c.png)
