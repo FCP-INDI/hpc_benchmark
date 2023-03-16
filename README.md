@@ -65,15 +65,14 @@ hpc_benchmark 'docker run \
 --preconfig abcd-options' \
 -o /home/{username}/hpc_benchmark.csv -msr 60
 ```
-
-<br>
+<br> <br>
 <b>hpc_plot_metrics</b>
 
 ```
 hpc_plot_metrics </home/{username}/{file}.csv>
 
 Arguments: 
-  {CSV file}                  CSV file that was the output for hpc_benchmark run
+  <CSV file>                  CSV file that was the output for hpc_benchmark run
 ```
 
 Details: 
