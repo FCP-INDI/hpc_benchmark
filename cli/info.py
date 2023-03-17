@@ -2,9 +2,9 @@
 settings in setup.py"""
 
 # Format expected by setup.py and doc/source/conf.py: string of form "X.Y.Z"
-_version_major = 0
+_version_major = 1
 _version_minor = 0
-_version_micro = 2
+_version_micro = 0
 _version_extra = ''
 
 # Construct full version string from these.
@@ -60,8 +60,9 @@ ISRELEASE = _version_extra == ''
 VERSION = __version__
 PYTHON_REQUIRES = ">= 3.5"
 REQUIREMENTS = [
+    "packaging>=21.3",
     "numpy>=1.16.4",
     "pandas>=0.23.4",
-    "plotly>=3.5.0"
+    "plotly>=3.5.0",
     "psutil>=5.4.6",
 ]

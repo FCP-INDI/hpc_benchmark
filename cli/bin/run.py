@@ -29,10 +29,10 @@ import subprocess
 import pandas as pd
 import numpy as np
 import psutil
-import argparse
 from subprocess import PIPE
 import multiprocessing as mp
 import time
+import click
 
 
 def target(command):
@@ -98,20 +98,15 @@ def log(command, timestep):
     return df
 
 
-def main():  
-    parser = argparse.ArgumentParser(
-        description = "Monitor any run in your command line. whatever you want to monitor (your commandline run) should be "
-        " between ' ' and then whatever additional argument."   
-    )
-    parser.add_argument('run_command', type=str, help='Command line run')
-    parser.add_argument('--outdir', '-o', required = True, help='Directory of where output CSV should be saved')
-    parser.add_argument('--max_sampling_rate', '-msr', default = 1, help='Frequency in seconds of how often to output metrics.'
-                        'Default is about 1 second. This sampling rate is an estimate and may output +/- 2 seconds of the MSR.')
-    args = parser.parse_args()
+@click.command()
+@click.argument('run_command', type=click.STRING, required=True)
+@click.option('--outdir', '-o', required=True, help='Directory of where output CSV should be saved')
+@click.option('--max_sampling_rate', '-msr', default=1, help='Frequency in seconds of how often to output metrics.'
+            'Default is about 1 second. This sampling rate is an estimate and may output +/- 2 seconds of the MSR.')
+def run(run_command, outdir=None, max_sampling_rate=None):  
 
-    outdir = (str(args.outdir))
-    command = (str(args.run_command)).split(' ')
-    timestep = (float(args.max_sampling_rate))
+    command = str(run_command).split(' ')
+    timestep = float(max_sampling_rate)
     output_df = log(command, timestep)
 
     if outdir is not None: 
@@ -121,7 +116,4 @@ def main():
             out_path = os.path.join(outdir)
             
     output_df.to_csv(out_path, index = None)
-
-
-if __name__ == '__main__':
-    main()
+    return

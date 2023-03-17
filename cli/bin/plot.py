@@ -15,18 +15,21 @@ Plot can later be saved by clicking the camera icon in the top right corner.
 Written by Amy Gutierrez (amy.gutierrez@childmind.org)
 """
 
-import argparse
+#import argparse
 import sys
 import pandas as pd
+import click
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('file', help='CSV file from hpc_benchmark')
-    args = parser.parse_args()
+@click.command()
+@click.argument('file', required=True)
+def plot(file):
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument('file', help='CSV file from hpc_benchmark')
+    #args = parser.parse_args()
 
-    one_file = (str(args.file))
+    one_file = str(file)
 
     data = pd.read_csv (one_file, header = 0)
     df = pd.DataFrame(data)
@@ -55,7 +58,3 @@ def main():
     fig.show()
     
     return
-
-if __name__=='__main__':
-    fig = main()
-    sys.exit(fig)
