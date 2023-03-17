@@ -21,10 +21,10 @@ pip install -i https://test.pypi.org/simple/ hpc-benchmark
 <b>User Guide</b>
 ------------------
 
-<b>hpc_benchmark</b>
+<b>hpc_benchmark run</b>
 
 ```
-hpc_benchmark 'run command' [options] -o <output_directory>
+hpc_benchmark run 'run command' [options] -o <output_directory>
 
 Arguments:
     'run command'              Command line run you would like to monitor
@@ -54,7 +54,7 @@ Options:
 
 EXAMPLE: 
 ```
-hpc_benchmark 'docker run \
+hpc_benchmark run 'docker run \
 --security-opt=apparmor:unconfined \
 --rm -v /home/{username}/data:/data \
 -v /home/{username}/output:/output fcpindi/c-pac:latest \
@@ -66,10 +66,10 @@ hpc_benchmark 'docker run \
 -o /home/{username}/hpc_benchmark.csv -msr 60
 ```
 <br> <br>
-<b>hpc_plot_metrics</b>
+<b>hpc_benchmark plot</b>
 
 ```
-hpc_plot_metrics </home/{username}/{file}.csv>
+hpc_benchmark plot </home/{username}/{file}.csv>
 
 Arguments: 
   <CSV file>                  CSV file that was the output for hpc_benchmark run
@@ -82,6 +82,6 @@ Plot can later be saved by clicking the camera icon in the top right corner.
 
 EXAMPLE:
 ```
-hpc_plot_metrics /home/{username}/hpc_benchmark.csv
+hpc_benchmark plot /home/{username}/hpc_benchmark.csv
 ```
 ![image](https://user-images.githubusercontent.com/58920810/225639070-fec2dc9d-ffdc-4603-937b-8a736ff71e5c.png)

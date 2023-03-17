@@ -2,7 +2,7 @@ from importlib.metadata import entry_points
 import os
 from setuptools import setup, find_packages
 
-ver_file = os.path.join('hpc_benchmark', 'info.py')
+ver_file = os.path.join('cli', 'info.py')
 os.path.realpath
 with open(ver_file) as f:
     exec(f.read())
@@ -27,8 +27,7 @@ opts = dict(name=NAME,
 if __name__ == '__main__':
     setup(entry_points = {
               'console_scripts': [
-                  'hpc_benchmark = hpc_benchmark.hpc_benchmark:main',
-                  'hpc_plot_metrics = hpc_benchmark.bin.hpc_plot_metrics:main'
+                  'hpc_benchmark = cli.main:main',
                   ]
           },
           **opts
