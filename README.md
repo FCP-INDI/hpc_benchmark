@@ -1,3 +1,12 @@
+<p align="center">
+    <img src="https://img.shields.io/github/contributors/FCP-INDI/hpc_benchmark"
+        height="25">
+    <img src="https://img.shields.io/github/issues/fcp-indi/hpc_benchmark"
+        height="25">
+     <img src="https://img.shields.io/github/stars/fcp-indi/hpc_benchmark?style=social"
+        height="25">
+</p>
+
 High Performance Computing (HPC) Benchmark
 =============================================
 
